@@ -1,0 +1,64 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm4dlacnapvt1"]
+
+[ext_resource type="Script" path="res://HUD.gd" id="1_1g4fr"]
+[ext_resource type="LabelSettings" uid="uid://b21i75xsldeia" path="res://moneda/HUDLABEL.tres" id="2_0mvit"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_1g4fr")
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreLabel" type="Label" parent="Menu"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 74.0
+offset_bottom = 97.0
+text = "0"
+label_settings = ExtResource("2_0mvit")
+
+[node name="TiempoLabel" type="Label" parent="Menu"]
+layout_mode = 0
+offset_left = 385.0
+offset_top = 10.0
+offset_right = 450.0
+offset_bottom = 99.0
+text = "0"
+label_settings = ExtResource("2_0mvit")
+
+[node name="InicioLabel" type="Label" parent="Menu"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 144.0
+offset_right = 502.0
+offset_bottom = 233.0
+text = "PERSIGUE LA MONEDA !"
+label_settings = ExtResource("2_0mvit")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Menu"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.0
+offset_top = 16.0
+offset_right = 107.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "INICIAR"
+
+[node name="MensajeTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="pressed" from="Menu/Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="MensajeTimer" to="." method="_on_mensaje_timer_timeout"]

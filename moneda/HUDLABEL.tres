@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b21i75xsldeia"]
+
+[ext_resource type="FontFile" uid="uid://hhwhtl3mm72i" path="res://assets/Kenney Bold.ttf" id="1_d04dn"]
+
+[resource]
+font = ExtResource("1_d04dn")
+font_size = 25
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)

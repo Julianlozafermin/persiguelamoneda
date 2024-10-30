@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://c3vl8pjsnkrja"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_5327m"]
+[ext_resource type="PackedScene" uid="uid://x3w7nv7x0xx1" path="res://player/player.tscn" id="1_npiom"]
+[ext_resource type="Texture2D" uid="uid://c360mvjpsnq3w" path="res://assets/grass.png" id="2_nunbg"]
+[ext_resource type="PackedScene" uid="uid://dm4dlacnapvt1" path="res://HUD/hud.tscn" id="4_6k75w"]
+[ext_resource type="AudioStream" uid="uid://cih3kw1tkf6s8" path="res://assets/audio/Coin.wav" id="5_2ennf"]
+[ext_resource type="AudioStream" uid="uid://bkswl43u6ava7" path="res://assets/audio/Level.wav" id="6_yslvc"]
+[ext_resource type="AudioStream" uid="uid://de7ato15il3d4" path="res://assets/audio/Hit.wav" id="7_0s3fb"]
+[ext_resource type="AudioStream" uid="uid://1rv8jqfeykej" path="res://assets/audio/Powerup.wav" id="8_8wctl"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://joystick/virtual_joystick.tscn" id="9_fmm8i"]
+
+[node name="main" type="Node"]
+script = ExtResource("1_5327m")
+metadata/_edit_vertical_guides_ = []
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("2_nunbg")
+stretch_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("1_npiom")]
+position = Vector2(241, 392)
+velocidad = 300
+
+[node name="ContenedorMonedas" type="Node" parent="."]
+
+[node name="InicioMarker2d" type="Marker2D" parent="."]
+position = Vector2(236, 353)
+
+[node name="JuegoTimer" type="Timer" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource("4_6k75w")]
+
+[node name="CoinAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_2ennf")
+
+[node name="InicioAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_yslvc")
+
+[node name="MorirAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_0s3fb")
+
+[node name="SpawnPowerupTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="PowerupAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_8wctl")
+
+[node name="Virtual Joystick" parent="." instance=ExtResource("9_fmm8i")]
+
+[connection signal="herirse" from="Player" to="." method="_on_player_herirse"]
+[connection signal="recolectar" from="Player" to="." method="_on_player_recolectar"]
+[connection signal="timeout" from="JuegoTimer" to="." method="_on_juego_timer_timeout"]
+[connection signal="inicio_juego" from="HUD" to="." method="nuevoJuego"]
+[connection signal="timeout" from="SpawnPowerupTimer" to="." method="_on_spawn_powerup_timer_timeout"]
